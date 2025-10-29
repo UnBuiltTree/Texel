@@ -3,7 +3,7 @@ render_mode diffuse_burley, specular_schlick_ggx;
 
 uniform sampler2D TEX : filter_nearest, source_color;
 uniform bool TRIPLANAR = true;
-uniform float TREXEL_SIZE : hint_range(0.001, 10.0) = 0.1;
+uniform float TEXEL_SIZE : hint_range(0.001, 10.0) = 0.1;
 uniform float BIAS_STRENGTH : hint_range(0.0, 0.01) = 0.001;
 uniform float TEXTURE_SCALE : hint_range(0.01, 10.0) = 1.0;
 
@@ -38,25 +38,25 @@ void vertex() {
 
 void fragment() {
     vec3 biased_pos = local_pos_v - normal_v * BIAS_STRENGTH;
-    vec3 trexel_index = floor(biased_pos / TREXEL_SIZE);
-    vec3 trexel_center_local = (trexel_index + 0.5) * TREXEL_SIZE;
+    vec3 texel_index = floor(biased_pos / TEXEL_SIZE);
+    vec3 texel_center_local = (texel_index + 0.5) * TEXEL_SIZE;
 
-    vec3 world_center = (MODEL_MATRIX * vec4(trexel_center_local, 1.0)).xyz;
+    vec3 world_center = (MODEL_MATRIX * vec4(texel_center_local, 1.0)).xyz;
     vec3 view_center  = (VIEW_MATRIX * vec4(world_center, 1.0)).xyz;
     LIGHT_VERTEX = view_center;
 
-    vec3 trexel_color;
+    vec3 texel_color;
 
     if (TRIPLANAR) {
-        trexel_color = sample_triplanar_texel(trexel_center_local, normal_v);
+        texel_color = sample_triplanar_texel(texel_center_local, normal_v);
     } else {
         vec2 ts = vec2(textureSize(TEX, 0));
         
         vec2 scaled_uv = UV * TEXTURE_SCALE;
         vec2 snap_uv = (floor(scaled_uv * ts) + 0.5) / ts;
 
-        trexel_color = texture(TEX, snap_uv).rgb;
+        texel_color = texture(TEX, snap_uv).rgb;
     }
 
-    ALBEDO = trexel_color;
+    ALBEDO = texel_color;
 }

@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dkqwbjbxsdex5"]
 
-[ext_resource type="Shader" uid="uid://c8j8drk0spacs" path="res://shaders/trexelShader.gdshader" id="1_7duua"]
+[ext_resource type="Shader" uid="uid://c8j8drk0spacs" path="res://shaders/texelShader.gdshader" id="1_7duua"]
 
 [resource]
 render_priority = 0

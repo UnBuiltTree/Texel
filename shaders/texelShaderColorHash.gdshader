@@ -4,7 +4,7 @@ render_mode diffuse_burley, specular_schlick_ggx;
 uniform sampler2D TEX : filter_nearest, source_color;
 uniform bool TRIPLANAR = true;
 
-uniform float TREXEL_SIZE : hint_range(0.001, 10.0) = 0.1;
+uniform float TEXEL_SIZE : hint_range(0.001, 10.0) = 0.1;
 uniform float BIAS_STRENGTH : hint_range(0.0, 0.01) = 0.0005;
 
 uniform float hashColorIntensity : hint_range(0.0, 1.0) = 0.5;
@@ -43,24 +43,24 @@ void vertex() {
 void fragment() {
     vec3 biased_pos = local_pos_v - normal_v * BIAS_STRENGTH;
 
-    vec3 trexel_index = floor(biased_pos / TREXEL_SIZE);
-    vec3 trexel_center_local = (trexel_index + 0.5) * TREXEL_SIZE;
+    vec3 texel_index = floor(biased_pos / TEXEL_SIZE);
+    vec3 texel_center_local = (texel_index + 0.5) * TEXEL_SIZE;
 
-    vec3 world_center = (MODEL_MATRIX * vec4(trexel_center_local, 1.0)).xyz;
+    vec3 world_center = (MODEL_MATRIX * vec4(texel_center_local, 1.0)).xyz;
     vec3 view_center  = (VIEW_MATRIX * vec4(world_center, 1.0)).xyz;
 
     LIGHT_VERTEX = view_center;
 
     vec3 tex_color;
     if (TRIPLANAR) {
-        tex_color = sample_triplanar_texel(trexel_center_local, normal_v);
+        tex_color = sample_triplanar_texel(texel_center_local, normal_v);
     } else {
         vec2 ts = vec2(textureSize(TEX, 0));
         vec2 snap_uv = (floor(UV * ts) + 0.5) / ts;
         tex_color = texture(TEX, snap_uv).rgb;
     }
 
-    vec3 voxel_color = hash3(trexel_index);
+    vec3 voxel_color = hash3(texel_index);
 
     vec3 final_color = mix(tex_color, voxel_color, hashColorIntensity);
 
