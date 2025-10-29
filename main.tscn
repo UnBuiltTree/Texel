@@ -1,0 +1,100 @@
+[gd_scene load_steps=13 format=3 uid="uid://cdrg2qawlgs8e"]
+
+[ext_resource type="Material" uid="uid://dkqwbjbxsdex5" path="res://materials/trexel_basic.tres" id="1_1bvp3"]
+[ext_resource type="Script" uid="uid://b0nqiolgv1y" path="res://scripts/nodeRotate.gd" id="2_lquwl"]
+[ext_resource type="Script" uid="uid://cnwa2ytkv8n5m" path="res://scripts/controller.gd" id="3_7mycd"]
+[ext_resource type="Shader" uid="uid://m7au0bwxiins" path="res://shaders/quantShader.gdshader" id="4_272bh"]
+[ext_resource type="Script" uid="uid://biofrtq1ykrbi" path="res://scripts/toggleRect.gd" id="5_lquwl"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lquwl"]
+size = Vector2(100, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kddcw"]
+lightmap_size_hint = Vector2i(34, 51)
+add_uv2 = true
+size = Vector3(3, 3, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ic8uy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_n5xcf"]
+lightmap_size_hint = Vector2i(14, 21)
+add_uv2 = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_qq5oe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n5xcf"]
+shader = ExtResource("4_272bh")
+shader_parameter/LEVELS_H = 16.0
+shader_parameter/LEVELS_V = 16.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qq5oe"]
+viewport_path = NodePath("MainViewportContainer/MainViewport")
+
+[node name="Main" type="Node3D"]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, -2.5, 0)
+mesh = SubResource("PlaneMesh_lquwl")
+surface_material_override/0 = ExtResource("1_1bvp3")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+mesh = SubResource("BoxMesh_kddcw")
+surface_material_override/0 = ExtResource("1_1bvp3")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1, 0)
+mesh = SubResource("BoxMesh_ic8uy")
+surface_material_override/0 = ExtResource("1_1bvp3")
+script = ExtResource("2_lquwl")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2)
+mesh = SubResource("BoxMesh_n5xcf")
+surface_material_override/0 = ExtResource("1_1bvp3")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 2)
+mesh = SubResource("BoxMesh_qq5oe")
+surface_material_override/0 = ExtResource("1_1bvp3")
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+shadow_enabled = true
+shadow_normal_bias = 10.0
+omni_range = 20.0
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, -0.99999994, 8.742277e-08, 0, -8.742277e-08, -0.99999994, 0, 5, 0)
+mesh = SubResource("PlaneMesh_lquwl")
+surface_material_override/0 = ExtResource("1_1bvp3")
+
+[node name="MainViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="MainViewport" type="SubViewport" parent="MainViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="MainViewportContainer/MainViewport"]
+script = ExtResource("3_7mycd")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+top_level = true
+material = SubResource("ShaderMaterial_n5xcf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("ViewportTexture_qq5oe")
+script = ExtResource("5_lquwl")

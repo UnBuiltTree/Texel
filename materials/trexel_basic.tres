@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dkqwbjbxsdex5"]
+
+[ext_resource type="Shader" uid="uid://c8j8drk0spacs" path="res://shaders/trexelShader.gdshader" id="1_7duua"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_7duua")
+shader_parameter/TRIPLANAR = true
+shader_parameter/TREXEL_SIZE = 0.1
+shader_parameter/BIAS_STRENGTH = 0.0005
+shader_parameter/TEXTURE_SCALE = 0.50000002305148
