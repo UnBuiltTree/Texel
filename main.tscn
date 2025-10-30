@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cdrg2qawlgs8e"]
+[gd_scene load_steps=15 format=3 uid="uid://cdrg2qawlgs8e"]
 
 [ext_resource type="Material" uid="uid://dkqwbjbxsdex5" path="res://materials/trexel_basic.tres" id="1_1bvp3"]
 [ext_resource type="Material" uid="uid://b60jlfxd1owjs" path="res://materials/trexel_basic2.tres" id="2_272bh"]
@@ -18,11 +18,11 @@ size = Vector3(3, 3, 3)
 [sub_resource type="BoxMesh" id="BoxMesh_ic8uy"]
 size = Vector3(2, 2, 2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_n5xcf"]
-lightmap_size_hint = Vector2i(14, 21)
-add_uv2 = true
+[sub_resource type="PrismMesh" id="PrismMesh_7mycd"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qq5oe"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_272bh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n5xcf"]
 shader = ExtResource("4_272bh")
@@ -54,12 +54,17 @@ script = ExtResource("2_lquwl")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2)
-mesh = SubResource("BoxMesh_n5xcf")
+mesh = SubResource("PrismMesh_7mycd")
 surface_material_override/0 = ExtResource("1_1bvp3")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 2)
 mesh = SubResource("BoxMesh_qq5oe")
+surface_material_override/0 = ExtResource("1_1bvp3")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3336716, -1.2557524, -1.7028925)
+mesh = SubResource("CylinderMesh_272bh")
 surface_material_override/0 = ExtResource("1_1bvp3")
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="World"]

@@ -49,12 +49,18 @@ void fragment() {
 
     vec3 world_center = (MODEL_MATRIX * vec4(texel_center_local, 1.0)).xyz;
     vec3 view_center  = (VIEW_MATRIX * vec4(world_center, 1.0)).xyz;
+	vec3 world_pos = (MODEL_MATRIX * vec4(local_pos_v, 1.0)).xyz;
+	vec3 texel_face_normal = normalize(cross(dFdy(world_pos), dFdx(world_pos)));
+	
+	vec3 new_normal = normalize((VIEW_MATRIX * vec4(texel_face_normal, 0.0)).xyz);
+	
+	NORMAL = new_normal;
     LIGHT_VERTEX = view_center;
 
     vec3 texel_color;
 
     if (TRIPLANAR) {
-        texel_color = sample_triplanar_texel(texel_center_local, normal_v);
+        texel_color = sample_triplanar_texel(texel_center_local, new_normal);
     } else {
         vec2 scaled_uv = UV * TEXTURE_SCALE;
         vec2 snap_uv = (floor(scaled_uv * ts) + 0.5) / ts;

@@ -6,7 +6,7 @@
 interpolation_mode = 2
 interpolation_color_space = 2
 offsets = PackedFloat32Array(0, 0.2974359, 0.574359, 0.8717949, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.8443759, 0.94266117, 0.9640699, 1, 0.921322, 0.9099154, 0.949706, 1, 0.83206624, 0.72373646, 0.69338876, 1, 1, 1, 1, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.84313726, 0.06666667, 0.9647059, 1, 0.92156863, 0.9098039, 0.08235294, 1, 0.16078432, 0.7254902, 0.69411767, 1, 1, 1, 1, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_nhtaq"]
 
@@ -24,8 +24,7 @@ render_priority = 0
 shader = ExtResource("1_7duua")
 shader_parameter/TEX = SubResource("NoiseTexture2D_kkpi6")
 shader_parameter/TRIPLANAR = true
+shader_parameter/PIXEL_SCALE_TEXELS = true
 shader_parameter/TEXEL_SIZE = 0.1250000059375
 shader_parameter/BIAS_STRENGTH = -0.06299995549250004
 shader_parameter/TEXTURE_SCALE = 1.00000004680148
-shader_parameter/SNAP_GEOMETRY_FOR_SHADOWS = true
-shader_parameter/PIXEL_SCALE_TEXELS = true
