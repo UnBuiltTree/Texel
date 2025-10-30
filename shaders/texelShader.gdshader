@@ -60,7 +60,7 @@ void fragment() {
     vec3 texel_color;
 
     if (TRIPLANAR) {
-        texel_color = sample_triplanar_texel(texel_center_local, new_normal);
+        texel_color = sample_triplanar_texel(texel_center_local, texel_face_normal);
     } else {
         vec2 scaled_uv = UV * TEXTURE_SCALE;
         vec2 snap_uv = (floor(scaled_uv * ts) + 0.5) / ts;

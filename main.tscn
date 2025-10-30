@@ -67,20 +67,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3336716, -1.2557524, -1.70
 mesh = SubResource("CylinderMesh_272bh")
 surface_material_override/0 = ExtResource("1_1bvp3")
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.680462, 26.398176, -29.133957)
-light_color = Color(0.78039217, 1, 1, 1)
-light_energy = 0.5
-light_size = 10.0
-light_bake_mode = 0
-shadow_enabled = true
-shadow_normal_bias = 10.0
-shadow_blur = 0.0
-omni_range = 100.0
-omni_attenuation = 0.5
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 6.352721, 0)
+[node name="OmniLight3D3" type="OmniLight3D" parent="World/MeshInstance3D7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7470489, 0.23057938, -0.54435945)
+light_indirect_energy = 0.0
 light_bake_mode = 0
 shadow_enabled = true
 shadow_normal_bias = 10.0
@@ -98,6 +87,7 @@ stretch = true
 
 [node name="MainViewport" type="SubViewport" parent="MainViewportContainer"]
 handle_input_locally = false
+anisotropic_filtering_level = 0
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
@@ -116,3 +106,4 @@ mouse_filter = 2
 texture = SubResource("ViewportTexture_qq5oe")
 
 [node name="Node2D" parent="." instance=ExtResource("6_7mycd")]
+visible = false
