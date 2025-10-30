@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://cdrg2qawlgs8e"]
+[gd_scene load_steps=14 format=3 uid="uid://cdrg2qawlgs8e"]
 
 [ext_resource type="Material" uid="uid://dkqwbjbxsdex5" path="res://materials/trexel_basic.tres" id="1_1bvp3"]
+[ext_resource type="Material" uid="uid://b60jlfxd1owjs" path="res://materials/trexel_basic2.tres" id="2_272bh"]
 [ext_resource type="Script" uid="uid://b0nqiolgv1y" path="res://scripts/nodeRotate.gd" id="2_lquwl"]
 [ext_resource type="Script" uid="uid://cnwa2ytkv8n5m" path="res://scripts/controller.gd" id="3_7mycd"]
 [ext_resource type="Shader" uid="uid://m7au0bwxiins" path="res://shaders/quantShader.gdshader" id="4_272bh"]
-[ext_resource type="Script" uid="uid://biofrtq1ykrbi" path="res://scripts/toggleRect.gd" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://fgrqaypsqq2v" path="res://DebugShaderMenu.tscn" id="6_7mycd"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lquwl"]
 size = Vector2(100, 100)
@@ -15,6 +16,7 @@ add_uv2 = true
 size = Vector3(3, 3, 3)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ic8uy"]
+size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_n5xcf"]
 lightmap_size_hint = Vector2i(14, 21)
@@ -45,9 +47,9 @@ mesh = SubResource("BoxMesh_kddcw")
 surface_material_override/0 = ExtResource("1_1bvp3")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 mesh = SubResource("BoxMesh_ic8uy")
-surface_material_override/0 = ExtResource("1_1bvp3")
+surface_material_override/0 = ExtResource("2_272bh")
 script = ExtResource("2_lquwl")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="World"]
@@ -60,16 +62,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 2)
 mesh = SubResource("BoxMesh_qq5oe")
 surface_material_override/0 = ExtResource("1_1bvp3")
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+[node name="OmniLight3D4" type="OmniLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.680462, 26.398176, -29.133957)
+light_color = Color(0.78039217, 1, 1, 1)
+light_energy = 0.5
+light_size = 10.0
+light_bake_mode = 0
 shadow_enabled = true
 shadow_normal_bias = 10.0
-omni_range = 20.0
+shadow_blur = 0.0
+omni_range = 100.0
+omni_attenuation = 0.5
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, -0.99999994, 8.742277e-08, 0, -8.742277e-08, -0.99999994, 0, 5, 0)
-mesh = SubResource("PlaneMesh_lquwl")
-surface_material_override/0 = ExtResource("1_1bvp3")
+[node name="OmniLight3D3" type="OmniLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 6.352721, 0)
+light_bake_mode = 0
+shadow_enabled = true
+shadow_normal_bias = 10.0
+shadow_blur = 0.0
+omni_range = 100.0
+omni_attenuation = 0.5
 
 [node name="MainViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
@@ -87,7 +99,7 @@ render_target_update_mode = 4
 [node name="Camera3D" type="Camera3D" parent="MainViewportContainer/MainViewport"]
 script = ExtResource("3_7mycd")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="PostFX" type="TextureRect" parent="."]
 top_level = true
 material = SubResource("ShaderMaterial_n5xcf")
 anchors_preset = 15
@@ -97,4 +109,5 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("ViewportTexture_qq5oe")
-script = ExtResource("5_lquwl")
+
+[node name="Node2D" parent="." instance=ExtResource("6_7mycd")]
