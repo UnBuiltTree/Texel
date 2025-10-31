@@ -1,28 +1,28 @@
 [gd_scene load_steps=15 format=3 uid="uid://cdrg2qawlgs8e"]
 
-[ext_resource type="Material" uid="uid://dkqwbjbxsdex5" path="res://materials/trexel_basic.tres" id="1_1bvp3"]
-[ext_resource type="Material" uid="uid://b60jlfxd1owjs" path="res://materials/trexel_basic2.tres" id="2_272bh"]
-[ext_resource type="Script" uid="uid://b0nqiolgv1y" path="res://scripts/nodeRotate.gd" id="2_lquwl"]
-[ext_resource type="Script" uid="uid://cnwa2ytkv8n5m" path="res://scripts/controller.gd" id="3_7mycd"]
+[ext_resource type="Material" uid="uid://dkqwbjbxsdex5" path="res://materials/texel_basic.tres" id="1_1bvp3"]
+[ext_resource type="Material" uid="uid://b60jlfxd1owjs" path="res://materials/texel_basic2.tres" id="2_272bh"]
+[ext_resource type="Script" uid="uid://cn074p76fjm78" path="res://scripts/playerController.gd" id="4_5vw27"]
 [ext_resource type="Shader" uid="uid://m7au0bwxiins" path="res://shaders/quantShader.gdshader" id="4_272bh"]
 [ext_resource type="PackedScene" uid="uid://fgrqaypsqq2v" path="res://DebugShaderMenu.tscn" id="6_7mycd"]
 
+[sub_resource type="Environment" id="Environment_lquwl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kek77"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4c57u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
+size = Vector3(1000, 1, 1000)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_lquwl"]
-size = Vector2(100, 100)
+size = Vector2(1000, 1000)
 
-[sub_resource type="BoxMesh" id="BoxMesh_kddcw"]
-lightmap_size_hint = Vector2i(34, 51)
-add_uv2 = true
-size = Vector3(3, 3, 3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ic8uy"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
 size = Vector3(2, 2, 2)
 
-[sub_resource type="PrismMesh" id="PrismMesh_7mycd"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_qq5oe"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_272bh"]
+[sub_resource type="BoxMesh" id="BoxMesh_7mycd"]
+size = Vector3(2, 2, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n5xcf"]
 shader = ExtResource("4_272bh")
@@ -34,48 +34,60 @@ viewport_path = NodePath("MainViewportContainer/MainViewport")
 
 [node name="Main" type="Node3D"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lquwl")
+
 [node name="World" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, -2.5, 0)
-mesh = SubResource("PlaneMesh_lquwl")
-surface_material_override/0 = ExtResource("1_1bvp3")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
-mesh = SubResource("BoxMesh_kddcw")
-surface_material_override/0 = ExtResource("1_1bvp3")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-mesh = SubResource("BoxMesh_ic8uy")
-surface_material_override/0 = ExtResource("2_272bh")
-script = ExtResource("2_lquwl")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2)
-mesh = SubResource("PrismMesh_7mycd")
-surface_material_override/0 = ExtResource("1_1bvp3")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 2)
-mesh = SubResource("BoxMesh_qq5oe")
-surface_material_override/0 = ExtResource("1_1bvp3")
-
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3336716, -1.2557524, -1.7028925)
-mesh = SubResource("CylinderMesh_272bh")
-surface_material_override/0 = ExtResource("1_1bvp3")
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="World/MeshInstance3D7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7470489, 0.23057938, -0.54435945)
+[node name="OmniLight3D3" type="OmniLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+light_energy = 20.0
 light_indirect_energy = 0.0
-light_bake_mode = 0
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
 shadow_enabled = true
-shadow_normal_bias = 10.0
+shadow_normal_bias = 5.0
 shadow_blur = 0.0
-omni_range = 100.0
-omni_attenuation = 0.5
+omni_range = 256.0
+omni_attenuation = 2.0
+
+[node name="Player" type="CharacterBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, 0)
+script = ExtResource("4_5vw27")
+camera_path = NodePath("../../MainViewportContainer/MainViewport/Camera3D")
+
+[node name="PlayerShape" type="CollisionShape3D" parent="World/Player"]
+shape = SubResource("CapsuleShape3D_kek77")
+
+[node name="PlayerMesh" type="MeshInstance3D" parent="World/Player/PlayerShape"]
+transparency = 1.0
+mesh = SubResource("CapsuleMesh_4c57u")
+skeleton = NodePath("../..")
+
+[node name="Floor" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+
+[node name="CollisionShape" type="CollisionShape3D" parent="World/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_1bvp3")
+
+[node name="Mesh" type="MeshInstance3D" parent="World/Floor"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+mesh = SubResource("PlaneMesh_lquwl")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_1bvp3")
+
+[node name="Box1" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -2, -3)
+
+[node name="CollisionShape" type="CollisionShape3D" parent="World/Box1"]
+shape = SubResource("BoxShape3D_lquwl")
+
+[node name="Mesh" type="MeshInstance3D" parent="World/Box1"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+mesh = SubResource("BoxMesh_7mycd")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_272bh")
 
 [node name="MainViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
@@ -87,12 +99,10 @@ stretch = true
 
 [node name="MainViewport" type="SubViewport" parent="MainViewportContainer"]
 handle_input_locally = false
-anisotropic_filtering_level = 0
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="MainViewportContainer/MainViewport"]
-script = ExtResource("3_7mycd")
 
 [node name="PostFX" type="TextureRect" parent="."]
 top_level = true
