@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cdrg2qawlgs8e"]
+[gd_scene load_steps=36 format=3 uid="uid://cdrg2qawlgs8e"]
 
 [ext_resource type="Material" uid="uid://dkqwbjbxsdex5" path="res://materials/texel_basic.tres" id="1_1bvp3"]
 [ext_resource type="Sky" uid="uid://ck5ivr6kfso4m" path="res://materials/sky.tres" id="1_7mycd"]
@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bbyg7h5xdu8ku" path="res://platform.tscn" id="3_272bh"]
 [ext_resource type="Script" uid="uid://cn074p76fjm78" path="res://scripts/playerController.gd" id="4_5vw27"]
 [ext_resource type="Shader" uid="uid://m7au0bwxiins" path="res://shaders/quantShader.gdshader" id="4_272bh"]
+[ext_resource type="Shader" uid="uid://cgfu0awakhqit" path="res://shaders/depthDebug.gdshader" id="6_5vw27"]
 [ext_resource type="PackedScene" uid="uid://fgrqaypsqq2v" path="res://DebugShaderMenu.tscn" id="6_7mycd"]
+[ext_resource type="Shader" uid="uid://c8j8drk0spacs" path="res://shaders/texelShader.gdshader" id="6_kek77"]
 
 [sub_resource type="Environment" id="Environment_lquwl"]
 background_mode = 2
@@ -32,11 +34,39 @@ size = Vector3(10, 10, 10)
 [sub_resource type="BoxMesh" id="BoxMesh_7mycd"]
 size = Vector3(10, 10, 10)
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_272bh"]
+data = PackedVector3Array(-4, 1, 4, 4, 1, 4, -4, -1, 4, 4, 1, 4, 4, -1, 4, -4, -1, 4, 4, 1, -4, -4, 1, -4, 4, -1, -4, -4, 1, -4, -4, -1, -4, 4, -1, -4, 4, 1, 4, 4, 1, -4, 4, -1, 4, 4, 1, -4, 4, -1, -4, 4, -1, 4, -4, 1, -4, -4, 1, 4, -4, -1, -4, -4, 1, 4, -4, -1, 4, -4, -1, -4, 4, 1, 4, -4, 1, 4, 4, 1, -4, -4, 1, 4, -4, 1, -4, 4, 1, -4, -4, -1, 4, 4, -1, 4, -4, -1, -4, 4, -1, 4, 4, -1, -4, -4, -1, -4)
+
 [sub_resource type="BoxMesh" id="BoxMesh_272bh"]
 size = Vector3(8, 2, 8)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5vw27"]
 data = PackedVector3Array(-4, 1, 4, 4, 1, 4, -4, -1, 4, 4, 1, 4, 4, -1, 4, -4, -1, 4, 4, 1, -4, -4, 1, -4, 4, -1, -4, -4, 1, -4, -4, -1, -4, 4, -1, -4, 4, 1, 4, 4, 1, -4, 4, -1, 4, 4, 1, -4, 4, -1, -4, 4, -1, 4, -4, 1, -4, -4, 1, 4, -4, -1, -4, -4, 1, 4, -4, -1, 4, -4, -1, -4, 4, 1, 4, -4, 1, 4, 4, 1, -4, -4, 1, 4, -4, 1, -4, 4, 1, -4, -4, -1, 4, 4, -1, 4, -4, -1, -4, 4, -1, 4, 4, -1, -4, -4, -1, -4)
+
+[sub_resource type="Gradient" id="Gradient_4c57u"]
+offsets = PackedFloat32Array(0.45387453, 0.55719554, 0.63468635)
+colors = PackedColorArray(1, 0, 0, 1, 0.19999981, 0, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_efxa6"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dg77c"]
+noise = SubResource("FastNoiseLite_efxa6")
+color_ramp = SubResource("Gradient_4c57u")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycdy4"]
+render_priority = 0
+shader = ExtResource("6_kek77")
+shader_parameter/TEX = SubResource("NoiseTexture2D_dg77c")
+shader_parameter/TRIPLANAR = true
+shader_parameter/PIXEL_SCALE_TEXELS = false
+shader_parameter/TEXTURE_BIAS = 0.0
+shader_parameter/LIGHT_BIAS = -0.061
+shader_parameter/TEXEL_SIZE = 0.0625
+shader_parameter/TEXTURE_SCALE = 0.25
+
+[sub_resource type="BoxMesh" id="BoxMesh_w48qg"]
+material = SubResource("ShaderMaterial_ycdy4")
+size = Vector3(0.25, 0.25, 0.25)
 
 [sub_resource type="SphereMesh" id="SphereMesh_7mycd"]
 radius = 2.5
@@ -51,9 +81,24 @@ size = Vector3(10, 2, 10)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4c57u"]
 data = PackedVector3Array(-5, 1, 5, 5, 1, 5, -5, -1, 5, 5, 1, 5, 5, -1, 5, -5, -1, 5, 5, 1, -5, -5, 1, -5, 5, -1, -5, -5, 1, -5, -5, -1, -5, 5, -1, -5, 5, 1, 5, 5, 1, -5, 5, -1, 5, 5, 1, -5, 5, -1, -5, 5, -1, 5, -5, 1, -5, -5, 1, 5, -5, -1, -5, -5, 1, 5, -5, -1, 5, -5, -1, -5, 5, 1, 5, -5, 1, 5, 5, 1, -5, -5, 1, 5, -5, 1, -5, 5, 1, -5, -5, -1, 5, 5, -1, 5, -5, -1, -5, 5, -1, 5, 5, -1, -5, -5, -1, -5)
 
+[sub_resource type="BoxMesh" id="BoxMesh_5vw27"]
+size = Vector3(0.4, 6, 0.4)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kek77"]
+data = PackedVector3Array(-0.25, 3, 0.25, 0.25, 3, 0.25, -0.25, -3, 0.25, 0.25, 3, 0.25, 0.25, -3, 0.25, -0.25, -3, 0.25, 0.25, 3, -0.25, -0.25, 3, -0.25, 0.25, -3, -0.25, -0.25, 3, -0.25, -0.25, -3, -0.25, 0.25, -3, -0.25, 0.25, 3, 0.25, 0.25, 3, -0.25, 0.25, -3, 0.25, 0.25, 3, -0.25, 0.25, -3, -0.25, 0.25, -3, 0.25, -0.25, 3, -0.25, -0.25, 3, 0.25, -0.25, -3, -0.25, -0.25, 3, 0.25, -0.25, -3, 0.25, -0.25, -3, -0.25, 0.25, 3, 0.25, -0.25, 3, 0.25, 0.25, 3, -0.25, -0.25, 3, 0.25, -0.25, 3, -0.25, 0.25, 3, -0.25, -0.25, -3, 0.25, 0.25, -3, 0.25, -0.25, -3, -0.25, 0.25, -3, 0.25, 0.25, -3, -0.25, -0.25, -3, -0.25)
+
 [sub_resource type="Environment" id="Environment_7mycd"]
 background_mode = 2
 sky = ExtResource("1_7mycd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kek77"]
+render_priority = 10
+shader = ExtResource("6_5vw27")
+
+[sub_resource type="BoxMesh" id="BoxMesh_4c57u"]
+material = SubResource("ShaderMaterial_kek77")
+flip_faces = true
+size = Vector3(0.2, 0.2, 0.2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n5xcf"]
 shader = ExtResource("4_272bh")
@@ -163,7 +208,17 @@ skeleton = NodePath("../../../..")
 surface_material_override/0 = ExtResource("2_272bh")
 
 [node name="Ramp" type="StaticBody3D" parent="World/RandomBlocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -3, 15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -3, 15)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="World/RandomBlocks/Ramp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 1)
+shape = SubResource("ConcavePolygonShape3D_272bh")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="World/RandomBlocks/Ramp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 1)
+material_override = ExtResource("2_272bh")
+mesh = SubResource("BoxMesh_272bh")
+skeleton = NodePath("../MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/RandomBlocks/Ramp"]
 material_override = ExtResource("2_272bh")
@@ -171,6 +226,10 @@ mesh = SubResource("BoxMesh_272bh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/RandomBlocks/Ramp"]
 shape = SubResource("ConcavePolygonShape3D_5vw27")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="World/RandomBlocks/Ramp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6496422, 0)
+mesh = SubResource("BoxMesh_w48qg")
 
 [node name="Ball" type="StaticBody3D" parent="World/RandomBlocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, -0.5, 0)
@@ -195,6 +254,36 @@ mesh = SubResource("BoxMesh_kek77")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/RandomBlocks/Ramp2"]
 shape = SubResource("ConcavePolygonShape3D_4c57u")
 
+[node name="Pillar" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Pillar"]
+material_override = ExtResource("2_272bh")
+mesh = SubResource("BoxMesh_5vw27")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Pillar"]
+shape = SubResource("ConcavePolygonShape3D_kek77")
+
+[node name="Pillar2" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 14)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Pillar2"]
+material_override = ExtResource("2_272bh")
+mesh = SubResource("BoxMesh_5vw27")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Pillar2"]
+shape = SubResource("ConcavePolygonShape3D_kek77")
+
+[node name="Pillar3" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 18)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Pillar3"]
+material_override = ExtResource("2_272bh")
+mesh = SubResource("BoxMesh_5vw27")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Pillar3"]
+shape = SubResource("ConcavePolygonShape3D_kek77")
+
 [node name="MainViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -218,6 +307,11 @@ projection = 2
 size = 0.1
 near = 0.055
 
+[node name="debugDepthView" type="MeshInstance3D" parent="MainViewportContainer/MainViewport/Node3D/Camera3D"]
+visible = false
+cast_shadow = 0
+mesh = SubResource("BoxMesh_4c57u")
+
 [node name="PostFX" type="TextureRect" parent="."]
 visible = false
 top_level = true
@@ -236,5 +330,5 @@ visible = false
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.8995191, 0.058012694, 0.4330127, -0.4330127, 0.24999997, 0.86602545, -0.058012694, -0.96650636, 0.24999997, 0, 0, 0)
 shadow_enabled = true
-shadow_normal_bias = 0.0
+shadow_bias = 0.0
 shadow_blur = 0.0
