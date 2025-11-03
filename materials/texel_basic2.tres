@@ -7,9 +7,9 @@
 render_priority = 0
 shader = ExtResource("1_4hxuc")
 shader_parameter/TEX = ExtResource("2_eruoy")
-shader_parameter/TEXTURE_BIAS = 0.0
-shader_parameter/LIGHT_BIAS = -0.061
 shader_parameter/TRIPLANAR = true
 shader_parameter/PIXEL_SCALE_TEXELS = false
+shader_parameter/TEXTURE_BIAS = 0.0
+shader_parameter/LIGHT_BIAS = -0.061
 shader_parameter/TEXEL_SIZE = 0.0625
 shader_parameter/TEXTURE_SCALE = 0.25

@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://bbyg7h5xdu8ku"]
+
+[ext_resource type="Script" uid="uid://da2lbjjm2bqoo" path="res://scripts/self_delete.gd" id="1_s8bxr"]
+[ext_resource type="Shader" uid="uid://c8j8drk0spacs" path="res://shaders/texelShader.gdshader" id="2_c1gtx"]
+
+[sub_resource type="Gradient" id="Gradient_ry5bi"]
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.7, 0.8, 0.9)
+colors = PackedColorArray(0, 0, 1, 1, 0, 0.6666665, 1, 1, 0, 1, 0, 1, 0.36078432, 0, 1, 1, 1.92523e-07, 2.117753e-06, 0.98150307, 1, 0, 1, 0, 1, 1, 1, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ph1ng"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7u0im"]
+noise = SubResource("FastNoiseLite_ph1ng")
+color_ramp = SubResource("Gradient_ry5bi")
+seamless = true
+in_3d_space = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x8osn"]
+render_priority = 0
+shader = ExtResource("2_c1gtx")
+shader_parameter/TEX = SubResource("NoiseTexture2D_7u0im")
+shader_parameter/TRIPLANAR = true
+shader_parameter/PIXEL_SCALE_TEXELS = false
+shader_parameter/TEXTURE_BIAS = 0.0
+shader_parameter/LIGHT_BIAS = -0.061
+shader_parameter/TEXEL_SIZE = 0.0625
+shader_parameter/TEXTURE_SCALE = 0.25
+
+[sub_resource type="BoxMesh" id="BoxMesh_s8bxr"]
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ardar"]
+data = PackedVector3Array(-1, 0.25, 1, 1, 0.25, 1, -1, -0.25, 1, 1, 0.25, 1, 1, -0.25, 1, -1, -0.25, 1, 1, 0.25, -1, -1, 0.25, -1, 1, -0.25, -1, -1, 0.25, -1, -1, -0.25, -1, 1, -0.25, -1, 1, 0.25, 1, 1, 0.25, -1, 1, -0.25, 1, 1, 0.25, -1, 1, -0.25, -1, 1, -0.25, 1, -1, 0.25, -1, -1, 0.25, 1, -1, -0.25, -1, -1, 0.25, 1, -1, -0.25, 1, -1, -0.25, -1, 1, 0.25, 1, -1, 0.25, 1, 1, 0.25, -1, -1, 0.25, 1, -1, 0.25, -1, 1, 0.25, -1, -1, -0.25, 1, 1, -0.25, 1, -1, -0.25, -1, 1, -0.25, 1, 1, -0.25, -1, -1, -0.25, -1)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_s8bxr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("ShaderMaterial_x8osn")
+mesh = SubResource("BoxMesh_s8bxr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ardar")

@@ -1,26 +1,15 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://dkqwbjbxsdex5"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dkqwbjbxsdex5"]
 
 [ext_resource type="Shader" uid="uid://c8j8drk0spacs" path="res://shaders/texelShader.gdshader" id="1_7duua"]
-
-[sub_resource type="Gradient" id="Gradient_nmvio"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vrbf6"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8yr16"]
-width = 720
-height = 720
-noise = SubResource("FastNoiseLite_vrbf6")
-color_ramp = SubResource("Gradient_nmvio")
-seamless = true
-in_3d_space = true
+[ext_resource type="Texture2D" uid="uid://c0bqpj30ijb4s" path="res://odd_tile.png" id="2_vrbf6"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_7duua")
-shader_parameter/TEX = SubResource("NoiseTexture2D_8yr16")
-shader_parameter/TEXTURE_BIAS = 0.0
-shader_parameter/LIGHT_BIAS = -0.061
+shader_parameter/TEX = ExtResource("2_vrbf6")
 shader_parameter/TRIPLANAR = true
 shader_parameter/PIXEL_SCALE_TEXELS = false
+shader_parameter/TEXTURE_BIAS = 0.0
+shader_parameter/LIGHT_BIAS = -0.061
 shader_parameter/TEXEL_SIZE = 0.0625
 shader_parameter/TEXTURE_SCALE = 0.25
