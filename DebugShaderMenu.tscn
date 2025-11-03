@@ -1,92 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://fgrqaypsqq2v"]
+[gd_scene load_steps=2 format=3 uid="uid://fgrqaypsqq2v"]
 
-[ext_resource type="Script" uid="uid://br54owiljpx71" path="res://scripts/debug_menu.gd" id="1_wtbp0"]
 [ext_resource type="Script" uid="uid://pcnxov08box" path="res://scripts/panel_debug.gd" id="2_1yuim"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("1_wtbp0")
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
-offset_right = 183.0
-offset_bottom = 424.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer"]
-layout_mode = 2
-
-[node name="Check_TRIPLANAR" type="CheckBox" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-button_pressed = true
-text = "Triplaner sampling"
-
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "Texel Size"
-
-[node name="Slider_TEXEL_SIZE" type="HSlider" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-max_value = 13.0
-value = 6.0
-tick_count = 14
-
-[node name="Label2" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "Bias"
-
-[node name="Slider_BIAS" type="HSlider" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-min_value = -0.1
-max_value = 0.1
-step = 0.002
-value = 0.062
-
-[node name="Label3" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "Texure Scale"
-
-[node name="Slider_TEXTURE_SCALE" type="HSlider" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-min_value = 0.01
-max_value = 2.0
-step = 0.01
-value = 0.09999999999999999
-
-[node name="Check_PIX_SCALE_TEXEL" type="CheckBox" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "Pixel Scale Texels"
-
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Check_POST_FX" type="CheckBox" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "Quant Pallet Shader"
-
-[node name="Label4" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "Hue Levels"
-
-[node name="Slider_LEVELS_H" type="HSlider" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-min_value = 3.0
-max_value = 64.0
-value = 10.0
-
-[node name="Label5" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "Value Levels"
-
-[node name="Slider_LEVELS_V" type="HSlider" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-min_value = 3.0
-max_value = 64.0
-value = 10.0
 
 [node name="PanelDebug" type="PanelContainer" parent="CanvasLayer"]
 anchors_preset = 1

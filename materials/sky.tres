@@ -1,0 +1,28 @@
+[gd_resource type="Sky" load_steps=3 format=3 uid="uid://ck5ivr6kfso4m"]
+
+[ext_resource type="Shader" uid="uid://dfu1ehccpve4f" path="res://shaders/texelSky.gdshader" id="1_hu07j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ysi4x"]
+shader = ExtResource("1_hu07j")
+shader_parameter/SKY_TEXEL_SIZE = 10.0
+shader_parameter/CLOUD_TEXEL_SIZE = 10.0
+shader_parameter/ENABLE_CLOUDS = true
+shader_parameter/SKY_FAR = 50000.0
+shader_parameter/CLOUD_LAYER_Y = 100.0
+shader_parameter/LAYER_HEIGHT = 10.0
+shader_parameter/LAYER_COUNT = 5
+shader_parameter/CLOUD_SCROLL = 0.01
+shader_parameter/CLOUD_FADE_DISTANCE = 2000.0
+shader_parameter/CLOUD_SCALE = 0.02
+shader_parameter/cloud_edge_start = 0.5
+shader_parameter/cloud_edge_end = 0.6
+shader_parameter/sky_color = Vector3(0.3, 0.45, 0.8)
+shader_parameter/cloud_color = Vector3(1, 1, 1)
+shader_parameter/sun_dir = Vector3(-60, -60, -50)
+shader_parameter/sun_radius = 5000.0
+shader_parameter/sun_color = Vector3(1, 0.95, 0.75)
+
+[resource]
+sky_material = SubResource("ShaderMaterial_ysi4x")
+process_mode = 1
+radiance_size = 2

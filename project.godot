@@ -20,7 +20,7 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/resizable=false
 window/stretch/mode="viewport"
-window/vsync/vsync_mode=0
+window/vsync/vsync_mode=2
 
 [input]
 
@@ -80,3 +80,4 @@ textures/decals/filter=0
 textures/light_projectors/filter=0
 lights_and_shadows/tighter_shadow_caster_culling=false
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+lights_and_shadows/positional_shadow/atlas_size=8192
