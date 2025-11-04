@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cdrg2qawlgs8e"]
+[gd_scene load_steps=33 format=3 uid="uid://cdrg2qawlgs8e"]
 
 [ext_resource type="Material" uid="uid://dkqwbjbxsdex5" path="res://materials/texel_basic.tres" id="1_1bvp3"]
 [ext_resource type="Sky" uid="uid://ck5ivr6kfso4m" path="res://materials/sky.tres" id="1_7mycd"]
@@ -8,7 +8,6 @@
 [ext_resource type="Shader" uid="uid://m7au0bwxiins" path="res://shaders/quantShader.gdshader" id="4_272bh"]
 [ext_resource type="Shader" uid="uid://cgfu0awakhqit" path="res://shaders/depthDebug.gdshader" id="6_5vw27"]
 [ext_resource type="PackedScene" uid="uid://fgrqaypsqq2v" path="res://DebugShaderMenu.tscn" id="6_7mycd"]
-[ext_resource type="Shader" uid="uid://c8j8drk0spacs" path="res://shaders/texelShader.gdshader" id="6_kek77"]
 
 [sub_resource type="Environment" id="Environment_lquwl"]
 background_mode = 2
@@ -43,26 +42,11 @@ size = Vector3(8, 2, 8)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5vw27"]
 data = PackedVector3Array(-4, 1, 4, 4, 1, 4, -4, -1, 4, 4, 1, 4, 4, -1, 4, -4, -1, 4, 4, 1, -4, -4, 1, -4, 4, -1, -4, -4, 1, -4, -4, -1, -4, 4, -1, -4, 4, 1, 4, 4, 1, -4, 4, -1, 4, 4, 1, -4, 4, -1, -4, 4, -1, 4, -4, 1, -4, -4, 1, 4, -4, -1, -4, -4, 1, 4, -4, -1, 4, -4, -1, -4, 4, 1, 4, -4, 1, 4, 4, 1, -4, -4, 1, 4, -4, 1, -4, 4, 1, -4, -4, -1, 4, 4, -1, 4, -4, -1, -4, 4, -1, 4, 4, -1, -4, -4, -1, -4)
 
-[sub_resource type="Gradient" id="Gradient_4c57u"]
-offsets = PackedFloat32Array(0.45387453, 0.55719554, 0.63468635)
-colors = PackedColorArray(1, 0, 0, 1, 0.19999981, 0, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_efxa6"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dg77c"]
-noise = SubResource("FastNoiseLite_efxa6")
-color_ramp = SubResource("Gradient_4c57u")
+[sub_resource type="Shader" id="Shader_5vw27"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ycdy4"]
 render_priority = 0
-shader = ExtResource("6_kek77")
-shader_parameter/TEX = SubResource("NoiseTexture2D_dg77c")
-shader_parameter/TRIPLANAR = true
-shader_parameter/PIXEL_SCALE_TEXELS = false
-shader_parameter/TEXTURE_BIAS = 0.0
-shader_parameter/LIGHT_BIAS = -0.061
-shader_parameter/TEXEL_SIZE = 0.0625
-shader_parameter/TEXTURE_SCALE = 0.25
+shader = SubResource("Shader_5vw27")
 
 [sub_resource type="BoxMesh" id="BoxMesh_w48qg"]
 material = SubResource("ShaderMaterial_ycdy4")
@@ -103,7 +87,7 @@ size = Vector3(0.2, 0.2, 0.2)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n5xcf"]
 shader = ExtResource("4_272bh")
 shader_parameter/LEVELS_H = 16.0
-shader_parameter/LEVELS_V = 16.0
+shader_parameter/LEVELS_V = 8.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_qq5oe"]
 viewport_path = NodePath("MainViewportContainer/MainViewport")
@@ -313,7 +297,6 @@ cast_shadow = 0
 mesh = SubResource("BoxMesh_4c57u")
 
 [node name="PostFX" type="TextureRect" parent="."]
-visible = false
 top_level = true
 material = SubResource("ShaderMaterial_n5xcf")
 anchors_preset = 15
@@ -324,7 +307,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("ViewportTexture_qq5oe")
 
-[node name="Node2D" parent="." instance=ExtResource("6_7mycd")]
+[node name="DebugShaderMenu" parent="." instance=ExtResource("6_7mycd")]
 visible = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

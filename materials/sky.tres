@@ -25,4 +25,3 @@ shader_parameter/sun_color = Vector3(1, 0.95, 0.75)
 [resource]
 sky_material = SubResource("ShaderMaterial_ysi4x")
 process_mode = 1
-radiance_size = 2
