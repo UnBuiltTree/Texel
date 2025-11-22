@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c0bqpj30ijb4s"
-path.s3tc="res://.godot/imported/odd_tile.png-eae0b753b419214c26ca7776b77f56a5.s3tc.ctex"
+path.s3tc="res://.godot/imported/odd_tile.png-950bc59957b0a13cfae4d7be7b328282.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://odd_tile.png"
-dest_files=["res://.godot/imported/odd_tile.png-eae0b753b419214c26ca7776b77f56a5.s3tc.ctex"]
+source_file="res://textures/odd_tile.png"
+dest_files=["res://.godot/imported/odd_tile.png-950bc59957b0a13cfae4d7be7b328282.s3tc.ctex"]
 
 [params]
 

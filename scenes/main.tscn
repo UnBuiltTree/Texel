@@ -1,17 +1,17 @@
-[gd_scene load_steps=33 format=3 uid="uid://cdrg2qawlgs8e"]
+[gd_scene load_steps=30 format=3 uid="uid://cdrg2qawlgs8e"]
 
-[ext_resource type="Material" uid="uid://dkqwbjbxsdex5" path="res://materials/texel_basic.tres" id="1_1bvp3"]
-[ext_resource type="Sky" uid="uid://ck5ivr6kfso4m" path="res://materials/sky.tres" id="1_7mycd"]
-[ext_resource type="Material" uid="uid://b60jlfxd1owjs" path="res://materials/texel_basic2.tres" id="2_272bh"]
-[ext_resource type="PackedScene" uid="uid://bbyg7h5xdu8ku" path="res://platform.tscn" id="3_272bh"]
-[ext_resource type="Script" uid="uid://cn074p76fjm78" path="res://scripts/playerController.gd" id="4_5vw27"]
-[ext_resource type="Shader" uid="uid://m7au0bwxiins" path="res://shaders/quantShader.gdshader" id="4_272bh"]
-[ext_resource type="Shader" uid="uid://cgfu0awakhqit" path="res://shaders/depthDebug.gdshader" id="6_5vw27"]
-[ext_resource type="PackedScene" uid="uid://fgrqaypsqq2v" path="res://DebugShaderMenu.tscn" id="6_7mycd"]
+[ext_resource type="Sky" uid="uid://ck5ivr6kfso4m" path="res://materials/sky.tres" id="1_tipki"]
+[ext_resource type="Script" uid="uid://cn074p76fjm78" path="res://scripts/playerController.gd" id="2_85g3d"]
+[ext_resource type="PackedScene" uid="uid://bbyg7h5xdu8ku" path="res://scenes/platform.tscn" id="3_choun"]
+[ext_resource type="Material" uid="uid://dkqwbjbxsdex5" path="res://materials/texel_basic.tres" id="4_ya4ey"]
+[ext_resource type="Material" uid="uid://b60jlfxd1owjs" path="res://materials/texel_basic2.tres" id="5_eb6dy"]
+[ext_resource type="Shader" uid="uid://cgfu0awakhqit" path="res://shaders/depthDebug.gdshader" id="6_trceg"]
+[ext_resource type="Shader" uid="uid://m7au0bwxiins" path="res://shaders/quantShader.gdshader" id="7_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://fgrqaypsqq2v" path="res://scenes/DebugShaderMenu.tscn" id="8_jkv2x"]
 
 [sub_resource type="Environment" id="Environment_lquwl"]
 background_mode = 2
-sky = ExtResource("1_7mycd")
+sky = ExtResource("1_tipki")
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
 glow_intensity = 3.2
@@ -42,16 +42,6 @@ size = Vector3(8, 2, 8)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5vw27"]
 data = PackedVector3Array(-4, 1, 4, 4, 1, 4, -4, -1, 4, 4, 1, 4, 4, -1, 4, -4, -1, 4, 4, 1, -4, -4, 1, -4, 4, -1, -4, -4, 1, -4, -4, -1, -4, 4, -1, -4, 4, 1, 4, 4, 1, -4, 4, -1, 4, 4, 1, -4, 4, -1, -4, 4, -1, 4, -4, 1, -4, -4, 1, 4, -4, -1, -4, -4, 1, 4, -4, -1, 4, -4, -1, -4, 4, 1, 4, -4, 1, 4, 4, 1, -4, -4, 1, 4, -4, 1, -4, 4, 1, -4, -4, -1, 4, 4, -1, 4, -4, -1, -4, 4, -1, 4, 4, -1, -4, -4, -1, -4)
 
-[sub_resource type="Shader" id="Shader_5vw27"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycdy4"]
-render_priority = 0
-shader = SubResource("Shader_5vw27")
-
-[sub_resource type="BoxMesh" id="BoxMesh_w48qg"]
-material = SubResource("ShaderMaterial_ycdy4")
-size = Vector3(0.25, 0.25, 0.25)
-
 [sub_resource type="SphereMesh" id="SphereMesh_7mycd"]
 radius = 2.5
 height = 5.0
@@ -73,11 +63,11 @@ data = PackedVector3Array(-0.25, 3, 0.25, 0.25, 3, 0.25, -0.25, -3, 0.25, 0.25, 
 
 [sub_resource type="Environment" id="Environment_7mycd"]
 background_mode = 2
-sky = ExtResource("1_7mycd")
+sky = ExtResource("1_tipki")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kek77"]
 render_priority = 10
-shader = ExtResource("6_5vw27")
+shader = ExtResource("6_trceg")
 
 [sub_resource type="BoxMesh" id="BoxMesh_4c57u"]
 material = SubResource("ShaderMaterial_kek77")
@@ -85,7 +75,7 @@ flip_faces = true
 size = Vector3(0.2, 0.2, 0.2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n5xcf"]
-shader = ExtResource("4_272bh")
+shader = ExtResource("7_a8y0u")
 shader_parameter/LEVELS_H = 16.0
 shader_parameter/LEVELS_V = 8.0
 
@@ -101,12 +91,12 @@ environment = SubResource("Environment_lquwl")
 
 [node name="Player" type="CharacterBody3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -1, 0)
-script = ExtResource("4_5vw27")
+script = ExtResource("2_85g3d")
 groundAcceleration = 60.0
 airAcceleration = 200.0
 airSpeedLimit = 1.0
 camera_path = NodePath("../../MainViewportContainer/MainViewport/Node3D/Camera3D")
-platform_scene = ExtResource("3_272bh")
+platform_scene = ExtResource("3_choun")
 
 [node name="PlayerMesh" type="MeshInstance3D" parent="World/Player"]
 transparency = 1.0
@@ -127,7 +117,7 @@ shape = SubResource("BoxShape3D_1bvp3")
 
 [node name="Mesh" type="MeshInstance3D" parent="World/RandomBlocks/Floor"]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
-material_override = ExtResource("1_1bvp3")
+material_override = ExtResource("4_ya4ey")
 mesh = SubResource("PlaneMesh_lquwl")
 skeleton = NodePath("../../..")
 
@@ -141,7 +131,7 @@ shape = SubResource("BoxShape3D_lquwl")
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 mesh = SubResource("BoxMesh_7mycd")
 skeleton = NodePath("../../..")
-surface_material_override/0 = ExtResource("2_272bh")
+surface_material_override/0 = ExtResource("5_eb6dy")
 
 [node name="Box2" type="StaticBody3D" parent="World/RandomBlocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -6, 0)
@@ -153,7 +143,7 @@ shape = SubResource("BoxShape3D_lquwl")
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 mesh = SubResource("BoxMesh_7mycd")
 skeleton = NodePath("../../..")
-surface_material_override/0 = ExtResource("2_272bh")
+surface_material_override/0 = ExtResource("5_eb6dy")
 
 [node name="Box3" type="StaticBody3D" parent="World/RandomBlocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7, -15)
@@ -165,7 +155,7 @@ shape = SubResource("BoxShape3D_lquwl")
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 mesh = SubResource("BoxMesh_7mycd")
 skeleton = NodePath("../../../..")
-surface_material_override/0 = ExtResource("2_272bh")
+surface_material_override/0 = ExtResource("5_eb6dy")
 
 [node name="Box4" type="StaticBody3D" parent="World/RandomBlocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.5, -30)
@@ -177,7 +167,7 @@ shape = SubResource("BoxShape3D_lquwl")
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 mesh = SubResource("BoxMesh_7mycd")
 skeleton = NodePath("../../../..")
-surface_material_override/0 = ExtResource("2_272bh")
+surface_material_override/0 = ExtResource("5_eb6dy")
 
 [node name="Box5" type="StaticBody3D" parent="World/RandomBlocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 1, 30)
@@ -189,7 +179,7 @@ shape = SubResource("BoxShape3D_lquwl")
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 mesh = SubResource("BoxMesh_7mycd")
 skeleton = NodePath("../../../..")
-surface_material_override/0 = ExtResource("2_272bh")
+surface_material_override/0 = ExtResource("5_eb6dy")
 
 [node name="Ramp" type="StaticBody3D" parent="World/RandomBlocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -3, 15)
@@ -200,20 +190,16 @@ shape = SubResource("ConcavePolygonShape3D_272bh")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="World/RandomBlocks/Ramp"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 1)
-material_override = ExtResource("2_272bh")
+material_override = ExtResource("5_eb6dy")
 mesh = SubResource("BoxMesh_272bh")
 skeleton = NodePath("../MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/RandomBlocks/Ramp"]
-material_override = ExtResource("2_272bh")
+material_override = ExtResource("5_eb6dy")
 mesh = SubResource("BoxMesh_272bh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/RandomBlocks/Ramp"]
 shape = SubResource("ConcavePolygonShape3D_5vw27")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="World/RandomBlocks/Ramp"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6496422, 0)
-mesh = SubResource("BoxMesh_w48qg")
 
 [node name="Ball" type="StaticBody3D" parent="World/RandomBlocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, -0.5, 0)
@@ -222,7 +208,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, -0.5, 0)
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 mesh = SubResource("SphereMesh_7mycd")
 skeleton = NodePath("../../..")
-surface_material_override/0 = ExtResource("2_272bh")
+surface_material_override/0 = ExtResource("5_eb6dy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/RandomBlocks/Ball"]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -232,7 +218,7 @@ shape = SubResource("ConcavePolygonShape3D_7mycd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -3.5, 10)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/RandomBlocks/Ramp2"]
-material_override = ExtResource("2_272bh")
+material_override = ExtResource("5_eb6dy")
 mesh = SubResource("BoxMesh_kek77")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/RandomBlocks/Ramp2"]
@@ -242,7 +228,7 @@ shape = SubResource("ConcavePolygonShape3D_4c57u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 10)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Pillar"]
-material_override = ExtResource("2_272bh")
+material_override = ExtResource("5_eb6dy")
 mesh = SubResource("BoxMesh_5vw27")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Pillar"]
@@ -252,7 +238,7 @@ shape = SubResource("ConcavePolygonShape3D_kek77")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 14)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Pillar2"]
-material_override = ExtResource("2_272bh")
+material_override = ExtResource("5_eb6dy")
 mesh = SubResource("BoxMesh_5vw27")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Pillar2"]
@@ -262,7 +248,7 @@ shape = SubResource("ConcavePolygonShape3D_kek77")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, 0, 18)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Pillar3"]
-material_override = ExtResource("2_272bh")
+material_override = ExtResource("5_eb6dy")
 mesh = SubResource("BoxMesh_5vw27")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Pillar3"]
@@ -297,6 +283,7 @@ cast_shadow = 0
 mesh = SubResource("BoxMesh_4c57u")
 
 [node name="PostFX" type="TextureRect" parent="."]
+visible = false
 top_level = true
 material = SubResource("ShaderMaterial_n5xcf")
 anchors_preset = 15
@@ -307,7 +294,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("ViewportTexture_qq5oe")
 
-[node name="DebugShaderMenu" parent="." instance=ExtResource("6_7mycd")]
+[node name="DebugShaderMenu" parent="." instance=ExtResource("8_jkv2x")]
 visible = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

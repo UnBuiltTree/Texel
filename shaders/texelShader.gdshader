@@ -87,3 +87,11 @@ void fragment() {
 
     ALBEDO = texel_color;
 }
+
+void light() {
+    float shadow = ATTENUATION > 0.999 ? 1.0 : 0.0;
+
+    DIFFUSE_LIGHT += clamp(dot(NORMAL, LIGHT), 0.0, 1.0) * shadow * LIGHT_COLOR / PI;
+
+    SPECULAR_LIGHT = vec3(0.0);
+}

@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://b60jlfxd1owjs"]
 
 [ext_resource type="Shader" uid="uid://c8j8drk0spacs" path="res://shaders/texelShader.gdshader" id="1_4hxuc"]
-[ext_resource type="Texture2D" uid="uid://dwxao3gqraroj" path="res://odd_brick.png" id="2_eruoy"]
+[ext_resource type="Texture2D" uid="uid://dwxao3gqraroj" path="res://textures/odd_brick.png" id="2_eruoy"]
 
 [resource]
 render_priority = 0

@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dkqwbjbxsdex5"]
 
 [ext_resource type="Shader" uid="uid://c8j8drk0spacs" path="res://shaders/texelShader.gdshader" id="1_7duua"]
-[ext_resource type="Texture2D" uid="uid://c0bqpj30ijb4s" path="res://odd_tile.png" id="2_vrbf6"]
+[ext_resource type="Texture2D" uid="uid://c0bqpj30ijb4s" path="res://textures/odd_tile.png" id="2_vrbf6"]
 
 [resource]
 render_priority = 0
