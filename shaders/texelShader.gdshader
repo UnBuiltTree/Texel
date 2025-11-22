@@ -30,9 +30,9 @@ vec3 sample_face_aligned(vec3 p, vec3 normal) {
     vec2 ts = vec2(textureSize(TEX, 0));
     vec3 scaled = p / TEXTURE_SCALE;
 
-    vec2 uvx = (floor(scaled.zy * ts) + 0.5) / ts;
+    vec2 uvx = (floor(scaled.zy * -ts) + 0.5) / ts;
     vec2 uvy = (floor(scaled.xz * ts) + 0.5) / ts;
-    vec2 uvz = (floor(scaled.xy * ts) + 0.5) / ts;
+    vec2 uvz = (floor(scaled.xy * -ts) + 0.5) / ts;
 
     if (normal.x < 0.0) uvx.x = 1.0 - uvx.x;
     if (normal.y < 0.0) uvy.x = 1.0 - uvy.x;
